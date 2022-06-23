@@ -1,3 +1,3 @@
 mod glyph;
 
-pub use glyph::Glyph;
+pub use glyph::BitGlyph;

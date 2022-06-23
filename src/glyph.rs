@@ -1,6 +1,6 @@
 //! Glyph types and functions to transform between types.
 //! 
 
-mod basic;
+mod bit_glyph;
 
-pub use basic::Glyph;
+pub use bit_glyph::BitGlyph;

@@ -4,9 +4,18 @@
 use std::vec::Vec;
 
 /// Glyph in a basic bitmap format where each bit represents a pixel.
-pub struct Glyph<const ROWS: usize, const COLS: usize>(Box<[u8]>);
+pub struct BitGlyph<const ROWS: usize, const COLS: usize>(Box<[u8]>);
 
-impl<const R: usize, const C: usize> Default for Glyph<R, C> {
+impl<const R: usize, const C: usize> Default for BitGlyph<R, C> {
+    /// Create a new Glyph with each pixel set to 0.
+    ///
+    /// # Examples
+    /// 
+    /// ```
+    /// use rust_binfont_utils::BitGlyph;
+    /// let glyph: BitGlyph<16, 24> = BitGlyph::default();
+    /// ```
+    /// 
     fn default() -> Self {
         let data_length = {
             let cols = C as f64;
@@ -17,14 +26,16 @@ impl<const R: usize, const C: usize> Default for Glyph<R, C> {
     }
 }
 
-impl<const R: usize, const C: usize> Glyph<R, C> {
-    pub fn new(data: &[u8]) -> Option<Glyph<R, C>> {
+impl<const R: usize, const C: usize> BitGlyph<R, C> {
+    /// Create a new Glyph
+    ///
+    pub fn new(data: &[u8]) -> Option<BitGlyph<R, C>> {
         let data_length = {
             let (rows, cols) = (R, C as f64);
             let bytes_per_row = (cols as f64 / 8.0).ceil() as usize;
             bytes_per_row * rows
         };
-        
+
         if data.len() < data_length {
             None
         } else {
@@ -32,4 +43,3 @@ impl<const R: usize, const C: usize> Glyph<R, C> {
         }
     }
 }
-
