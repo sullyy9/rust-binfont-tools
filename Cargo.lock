@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "rust-binfont-tools"
+name = "rust_binfont_utils"
 version = "0.1.0"
